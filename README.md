@@ -11,6 +11,8 @@ A simple backend api created using postgres as database and express.js.
 - `git clone` ...
 - `cd ./express-typescript-api` && `npm install`
 - `npm run dev`
+- goto `http://localhost:8000/api/books` for books api
+- goto `http://localhost:8000/api/authors` for authors api
 
 ## If you want to run in Docker
 
