@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  postgres_database:
+    image: postgres:13
+    container_name: postgres_d
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: sherpa_user
+      POSTGRES_PASSWORD: sherpa_pass
+      POSTGRES_DB: express-typescript-api
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  backend:
+    build: 
+      context: .
+    depends_on:
+      - postgres_database
+    ports:
+      - '8000:8000'
+    environment:
+      DATABASE_URL: postgresql://sherpa_user:sherpa_pass@postgres_database:5432/express-typescript-api?schema=public
+    restart: always
+    command: npm run docker:start
+volumes:
+  pg-data:
